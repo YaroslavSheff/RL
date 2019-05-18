@@ -6,9 +6,7 @@
   height: 100%;
   margin: 0;
   background-color: #220c3d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 }
 
 html, body {
@@ -18,16 +16,103 @@ html, body {
 }
 
 .Main {
+  width: 100%;
+  height: 100%;
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.EarthRoot {
+
 }
 
 .Earth {
 
 }
 
+.overlay{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  /*line-height: 200px;
+
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -150px;
+  border-radius: 5px;
+  text-align: center;
+  z-index: 3;*/
+}
 
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+
+.modal {
+  width: 1000px;
+  height: 1000px;
+  position: fixed;
+  /*border: 2px solid hsl(183, 100%, 54%);*/
+  top: -50px;
+  left: 450px;
+  /*!*line-height: 200px;*!
+  border-radius: 5px;
+  text-align: center;
+  z-index: 11; !* 1px higher than the overlay layer *!
+  */
+}
+
+/***************************************************************************************************************************/
+
+.mover {
+  --anchorX: 50%;
+  --anchorY: 50%;
+
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  background: hsla(183, 90%, 54%, .3);
+  border: 2px solid hsl(183, 100%, 54%);
+  border-right-color: hsl(43, 100%, 50%);
+  border-left-color: hsl(343, 100%, 50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  offset-path: path("M60,150 C50,0 200,0 200,75 C200,150 350,150 350,0");
+  offset-rotate: auto 90deg;
+  offset-anchor: var(--anchorX) var(--anchorY);
+  animation: move-along var(--duration) 0ms infinite alternate ease-in-out;
+}
+.mover::after {
+  content: '';
+  position: absolute;
+  background: radial-gradient(circle at var(--anchorX) var(--anchorY), red 3px, transparent 3px) no-repeat;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.marker {
+  motion-path: path('M 5 5 m -4, 0 a 4,4 0 1,0 8,0 a 4,4 0 1,0 -8,0');
+  offset-path: path('M 5 5 m -4, 0 a 4,4 0 1,0 8,0 a 4,4 0 1,0 -8,0');
+  animation: move 3s linear infinite;
+}
+.track {
+  stroke: #ccc;
+}
+
+@keyframes move {
+  100% {
+    motion-offset: 80%;
+    offset-distance: 100%;
+  }
 }

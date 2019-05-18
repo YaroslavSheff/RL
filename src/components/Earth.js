@@ -6,7 +6,7 @@ import '../styles/App.css';
 class Earth extends PureComponent {
     render() {
         return (
-            <div className="earth">
+            <div className="EarthRoot">
                     <img src={logo} className="Earth" alt="logo" />
             </div>
         );

@@ -11,6 +11,9 @@ class App extends PureComponent {
   render() {
     return (
       <Main className="Main">
+        <div className="overlay"></div>
+        <Sputnik/>
+        <Sputnik/>
         <Earth/>
       </Main>
     );
