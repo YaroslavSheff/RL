@@ -1075,7 +1075,7 @@ Different projects choose different testing tradeoffs based on how often compone
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from Main;
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -1096,7 +1096,7 @@ npm install --save-dev enzyme react-test-renderer
 ```js
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from './App';
+import App from Main;
 
 it('renders without crashing', () => {
   shallow(<App />);

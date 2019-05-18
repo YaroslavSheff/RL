@@ -1,0 +1,21 @@
+.SputnikRoot {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    /*animation: spin infinite 20s linear;*/
+}
+
+.Sputnik {
+
+}
+
+.Rotate{
+    animation: spin infinite 20s linear;
+    /*animation: spin infinite 20s linear;*/
+}
+
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
