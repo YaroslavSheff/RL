@@ -14,7 +14,6 @@ class Sputnik extends PureComponent {
 
     componentDidMount() {
         const marker = window.document.getElementsByClassName('marker');
-        console.log(marker);
     }
 
     render() {
