@@ -19,15 +19,18 @@ module.exports = {
                 use: ["style-loader", "css-loader"]
             },
             {
-                test: /\.(ttf|eot|svg|gif|jpg|png|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                test: /\.svg$/,
                 use: [
                     {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 10000,
-                        },
+                        loader: "babel-loader"
                     },
-                ],
+                    {
+                        loader: "react-svg-loader",
+                        options: {
+                            jsx: true // true outputs JSX tags
+                        }
+                    }
+                ]
             }
         ]
     },

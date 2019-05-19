@@ -1,22 +1,33 @@
-.SputnikRoot {
-    width: 300px;
-    height: 300px;
-    top: 1150px;
-    background-color: aliceblue;
-    /*animation: spin infinite 20s linear;*/
+/*
+motion-path: path('M 5 5 m -4, 0 a 4,4 0 1,0 8,0 a 4,4 0 1,0 -8,0');
+offset-path: path('M 5 5 m -4, 0 a 4,4 0 1,0 8,0 a 4,4 0 1,0 -8,0');
+*/
+
+.marker {
+    animation-name: move;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
-.Sputnik {
-
+.natural {
+    motion-path: path('M 550 400 a 850,850 0 1,0 1,0');
+    offset-path: path('M 550 400 a 850,850 0 1,0 1,0');
 }
 
-.Rotate{
-    animation: spin infinite 20s linear;
-    /*animation: spin infinite 20s linear;*/
+.artificial {
+    motion-path: path('M 550 400 a 600,600 0 1,0 1,0');
+    offset-path: path('M 550 400 a 600,600 0 1,0 1,0');
+}
+
+@keyframes move {
+    0% {
+        motion-offset: 0%;
+        offset-distance: 0%;
+    }
+    100% {
+        motion-offset: 100%;
+        offset-distance: 100%;
+    }
 }
 
 
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}

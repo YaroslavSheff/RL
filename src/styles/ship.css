@@ -1,0 +1,22 @@
+.run {
+    motion-path: path('M 0,0 l 0,-900');
+    offset-path: path('M 0,0 l 0,-900');
+    animation-name: none;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-duration: 6s;
+    transform: rotate(90deg);
+}
+
+@keyframes move {
+    0% {
+        motion-offset: 0%;
+        offset-distance: 0%;
+    }
+    100% {
+        motion-offset: 100%;
+        offset-distance: 100%;
+    }
+}
+
+

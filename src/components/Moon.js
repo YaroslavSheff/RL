@@ -1,16 +1,10 @@
-import React, { PureComponent } from 'react';
-import logo from '../icons/moon.svg';
-import '../styles/App.css';
+import React from 'react';
+import MoonSVG from '../icons/moon.svg';
 
-
-class Moon extends PureComponent {
-    render() {
-        return (
-            <div className="Moon-root">
-                <img src={logo} className="Moon" alt="logo" />
-            </div>
-        );
-    }
-}
+const Moon = () => {
+    return (
+        <MoonSVG/>
+    );
+};
 
 export default Moon;

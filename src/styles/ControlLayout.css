@@ -1,0 +1,44 @@
+.controlLayout {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.flexLayout {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: flex-end;
+}
+
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+}
+
+.startButton {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 200px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: .8em 1em calc(.8em + 3px);
+    border-radius: 3px;
+    background: rgb(64, 199, 129);
+}

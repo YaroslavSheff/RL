@@ -1,67 +1,54 @@
-import React, { PureComponent } from 'react';
-import sputnik from '../icons/sputnik.svg';
+import React, {PureComponent} from 'react';
 import '../styles/Sputnik.css';
-
-const defaultWidth = 700;
-const defaultHeight = 700;
-const defaultOffsetX = window.innerWidth / 2 - defaultWidth / 2;
-const defaultOffsetY = window.innerHeight / 2 - defaultHeight / 2;
 
 
 class Sputnik extends PureComponent {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        const xRandom = Math.round((Math.random() - 0.5) * 100);
-        const yRandom = Math.round((Math.random() - 0.5) * 100);
-        console.warn({xRandom, yRandom});
         this.state = {
-            width: defaultWidth,
-            height: defaultHeight,
-            offsetX: defaultOffsetX + xRandom,
-            offsetY: defaultOffsetY + yRandom
+            defaultOffsetX: Math.round(Math.random() * 300 - 150),
+            defaultOffsetY: Math.round(Math.random() * 300 + 100)
         }
     }
 
-    /*componentDidMount() {
-        const { width, height, offsetX, offsetY } = this.state;
-        const modal = window.document.querySelector(".modal");
-
-        modal.setAttribute("width", width + "px");
-        modal.setAttribute("height", height + "px");
-        modal.setAttribute("left", offsetX  + "px");
-        modal.setAttribute("top", offsetY + "px");
-    }*/
-
-
+    componentDidMount() {
+        const marker = window.document.getElementsByClassName('marker');
+        console.log(marker);
+    }
 
     render() {
-        const { width, height, offsetX, offsetY } = this.state;
-
+        const {width, height, viewBox, typeSputnik} = this.props;
+        const {defaultOffsetX, defaultOffsetY} = this.state;
+        let randomDuration, path, tmp;
+        switch (typeSputnik) {
+            case "NATURAL":
+                randomDuration = Math.round((Math.random() * 100 + 100) / 10);
+                path = 'M 550 400 a 900,900 0 1,0 1,0';
+                tmp = 'natural';
+                break;
+            case "ARTIFICIAL":
+                randomDuration = Math.round((Math.random() * 100) / 10);
+                path = 'M 550 400 a 600,600 0 1,0 1,0';
+                tmp = 'artificial';
+                break;
+            default:
+                randomDuration = Math.round((Math.random() * 100) / 10);
+                path = 'M 550 400 a 600,600 0 1,0 1,0';
+                tmp = 'artificial';
+        }
+        const className = 'marker ' + tmp;
         return (
-                <div className="modal" style={{"left": offsetX, "top": offsetY}}>
-                    <svg width={width} height={height} viewBox={"0 0 "+ width + " " + height}>
-                        <circle cx={width / 2 + "px"} cy={width / 2 + "px"} r={width / 2} stroke="white"
-                                strokeWidth="1px" strokeDasharray="3" fill={"none"}/>
-                    </svg>
-                    <svg viewBox="0,0 10,10" width="200px" height="200px">
+            <svg width={width} height={height}
+                 viewBox={[viewBox[0] + defaultOffsetX, viewBox[1] + defaultOffsetY, viewBox[2] - 100, viewBox[3] + 700]}>
 
-                        <path
-                            className="track"
-                            fill="none"
-                            stroke-width="0.25"
-                            d="M 5 5 m -4, 0 a 4,4 0 1,0 8,0 a 4,4 0 1,0 -8,0"
-                        />
+                <path d={path} stroke="white"
+                      strokeWidth="1px" strokeDasharray="3" fill={"none"}/>
+                <g className={className} style={{animationDuration: randomDuration + 's'}}>
+                    {this.props.children}
+                </g>
 
-                        <img src={sputnik} alt={'спутник'} className="marker"/>
-                        <circle className="marker" r="1" fill="orange"></circle>
-
-                    </svg>
-                    <div className={'mover'}>
-                        <img src={sputnik} alt={'спутник'}/>
-                    </div>
-                </div>
-
+            </svg>
         );
     }
 }
