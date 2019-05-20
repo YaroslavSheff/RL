@@ -1,6 +1,6 @@
 .run {
-    motion-path: path('M 0,0 l 0,-900');
-    offset-path: path('M 0,0 l 0,-900');
+    /* motion-path: path('M 588,100 l 0,-900');
+     offset-path: path('M 588,100 l 0,-900');*/
     animation-name: none;
     animation-iteration-count: 1;
     animation-timing-function: linear;

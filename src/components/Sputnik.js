@@ -12,27 +12,23 @@ class Sputnik extends PureComponent {
         }
     }
 
-    componentDidMount() {
-        const marker = window.document.getElementsByClassName('marker');
-    }
-
     render() {
-        const {width, height, viewBox, typeSputnik} = this.props;
+        const {width, height, viewBox, typeSputnik, v} = this.props;
         const {defaultOffsetX, defaultOffsetY} = this.state;
-        let randomDuration, path, tmp;
+        let duration, path, tmp;
         switch (typeSputnik) {
             case "NATURAL":
-                randomDuration = Math.round((Math.random() * 100 + 100) / 10);
+                duration = -v + 15;
                 path = 'M 550 400 a 900,900 0 1,0 1,0';
                 tmp = 'natural';
                 break;
             case "ARTIFICIAL":
-                randomDuration = Math.round((Math.random() * 100) / 10);
+                duration = -v + 25;
                 path = 'M 550 400 a 600,600 0 1,0 1,0';
                 tmp = 'artificial';
                 break;
             default:
-                randomDuration = Math.round((Math.random() * 100) / 10);
+                duration = -v + 25;
                 path = 'M 550 400 a 600,600 0 1,0 1,0';
                 tmp = 'artificial';
         }
@@ -43,7 +39,7 @@ class Sputnik extends PureComponent {
 
                 <path d={path} stroke="white"
                       strokeWidth="1px" strokeDasharray="3" fill={"none"}/>
-                <g className={className} style={{animationDuration: randomDuration + 's'}}>
+                <g className={className} style={{animationDuration: duration + 's'}}>
                     {this.props.children}
                 </g>
 

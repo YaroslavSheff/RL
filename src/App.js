@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
 import Earth from './icons/earth.svg'
 import Sputnik from "./components/Sputnik";
 import Moon from "./components/Moon";
@@ -10,24 +11,33 @@ import './styles/App.css';
 
 const iW = window.innerWidth;
 const iH = window.innerHeight;
+const iWp = Math.round(iW / 100);
+const iHp = Math.round(iH / 100);
 
 class App extends PureComponent {
+
     render() {
+        const {sputniki, moon} = this.props;
         const viewBoxCanvas = [0, 0, iW, iH];
         const earthConf = {
             width: iW,
             height: iH,
-            viewBox: [iW / -2 + 200, iH / -2 + 200, iW, iH]
+            viewBox: [iW / -2 + iWp * 10, iH / -2 + iHp * 20, iW, iH]
         };
         const sputnikConf = {
-            width: 1600,
-            height: 1200,
-            viewBox: [-100, -100, 800, 1600]
+            width: iW,
+            height: iH,
+            viewBox: [-iWp * 15, -iHp * 10, iW, iH]
+        };
+        const moonConf = {
+            width: iW,
+            height: iH,
+            viewBox: [-iWp * 15, iHp * 10, iW, iH]
         };
         const rocketConf = {
-            width: 1600,
-            height: 1200,
-            viewBox: [-100, -100, 800, 1600]
+            width: iW,
+            height: iH,
+            viewBox: [iW / -2 + iWp * 10, 0, iW, iH]
         };
         return (
             <div>
@@ -35,22 +45,20 @@ class App extends PureComponent {
                     viewBox={viewBoxCanvas}
                 >
                     <Earth {...earthConf}/>
-                    <Sputnik {...sputnikConf} typeSputnik={"ARTIFICIAL"}>
-                        <WrapperSputnik/>
-                    </Sputnik>
-                    <Sputnik {...sputnikConf} typeSputnik={"ARTIFICIAL"}>
-                        <WrapperSputnik/>
-                    </Sputnik>
-                    <Sputnik {...sputnikConf} typeSputnik={"ARTIFICIAL"}>
-                        <WrapperSputnik/>
-                    </Sputnik>
-                    <Sputnik {...sputnikConf} typeSputnik={"ARTIFICIAL"}>
-                        <WrapperSputnik/>
-                    </Sputnik>
-                    <Sputnik {...sputnikConf} typeSputnik={"NATURAL"}>
+                    {
+                        sputniki.map(
+                            (v, index) => {
+                                return <Sputnik key={index} {...sputnikConf} typeSputnik={"ARTIFICIAL"} v={v}
+                                                index={index}>
+                                    <WrapperSputnik/>
+                                </Sputnik>
+                            }
+                        )
+                    }
+                    <Sputnik {...moonConf} typeSputnik={"NATURAL"} v={moon.v}>
                         <Moon/>
                     </Sputnik>
-                    <Rocket {...rocketConf}/>
+                    <Rocket {...earthConf}/>
                 </svg>
                 <ControlLayout/>
             </div>
@@ -58,4 +66,11 @@ class App extends PureComponent {
     }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        sputniki: state.sputniki,
+        moon: state.moon
+    }
+};
+
+export default connect(mapStateToProps)(App);

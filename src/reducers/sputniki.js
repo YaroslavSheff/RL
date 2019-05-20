@@ -1,10 +1,18 @@
-const initialState = {
-    v: 1
-};
-
-export default function sputniki(state = initialState, action) {
+export default function sputniki(state = [10, 10], action) {
     if (action.type === 'CHANGE_SPEED') {
-        return Object.assign({}, state, {v: action.value});
+        const newState = state.slice();
+        newState.splice(action.index, 1, action.value);
+        return newState
+    }
+    if (action.type === 'ADD_SPUTNIK') {
+        const newState = state.slice();
+        newState.push(Math.round(Math.random()*1000/100));
+        return newState
+    }
+    if (action.type === 'REMOVE_SPUTNIK') {
+        const newState = state.slice();
+        newState.pop();
+        return newState
     }
     return state;
 }

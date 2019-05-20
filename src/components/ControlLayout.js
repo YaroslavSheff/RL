@@ -1,6 +1,9 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import '../styles/ControlLayout.css';
+import ControlSputniks from "./ControlSputniks";
+import ControlSpeed from "./ControlSpeed";
+import ControlMoon from "./ControlMoon";
 
 
 class ControlLayout extends PureComponent {
@@ -18,6 +21,11 @@ class ControlLayout extends PureComponent {
         return (
             <div className={'controlLayout'}>
                 <div className={'flexLayout'}>
+                    <div className={'menu'}>
+                        <ControlSputniks/>
+                        <ControlSpeed initial={{max: 20, min: 10, step: 1}}/>
+                        <ControlMoon initial={{max: 10, min: 5, step: 1}}/>
+                    </div>
                     <div className={'footer'}>
                         <div className={'startButton'} onClick={this.onClickLaunch}>
                             {'запуск'}

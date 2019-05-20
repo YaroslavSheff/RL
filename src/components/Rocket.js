@@ -1,27 +1,37 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import Sputnik from '../icons/ship.svg';
+import Ship from '../icons/ship.svg';
 import '../styles/ship.css';
 
 class Rocket extends PureComponent {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.running !== this.props.running) {
+            const runner = window.document.querySelector('.run');
+            prevProps.running === 'false'
+                ? runner.style.animationName = 'move'
+                : runner.style.animationName = 'none'
+        }
+    }
+
+    componentDidMount() {
+        const {viewBox} = this.props;
+        const path = 'M ' + viewBox[2] / 10 + ',' + viewBox[3] / 20 + ' l 0,-900';
         const runner = window.document.querySelector('.run');
-        prevProps.running === 'false'
-            ? runner.style.animationName = 'move'
-            : runner.style.animationName = 'none'
+        runner.style.motionPath = 'path(\'' + path + '\')';
+        runner.style.offsetPath = 'path(\'' + path + '\')';
     }
 
     render() {
-        const path = 'M 588,100 l 0,-900';
         const {width, height, viewBox} = this.props;
+        const path = 'M ' + viewBox[2] / 9 + ',' + viewBox[3] / 12 + ' l 0,-900';
         return (
             <svg width={width} height={height}
-                 viewBox={[viewBox[0], viewBox[1] - 450, viewBox[2] - 100, viewBox[3] + 700]}>
-                <path d={path} stroke="green"
-                      strokeWidth="1px" strokeDasharray="3" fill={"none"}/>
+                 viewBox={viewBox}>
+                {/*<path d={path} stroke="green"
+                      strokeWidth="1px" strokeDasharray="3" fill={"none"}/>*/}
                 <g className={'run'}>
-                    <Sputnik {...this.props} />
+                    <Ship/>
                 </g>
             </svg>
         );
